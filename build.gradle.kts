@@ -1,0 +1,25 @@
+plugins {
+    id("java")
+}
+
+group = "dev.cadindie"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("com.squareup.okhttp3:okhttp:5.5.0")
+    implementation("com.google.code.gson:gson:2.14.0")
+    implementation("org.tomlj:tomlj:2.1.1")
+    compileOnly("org.graalvm.sdk:nativeimage:25.3.4.1")
+
+    testImplementation(platform("org.junit:junit-bom:6.0.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
