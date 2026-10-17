@@ -2,6 +2,8 @@ package dev.cadindie;
 
 import dev.cadindie.sources.SearchRequest;
 import dev.cadindie.sources.Source;
+import me.judge.nativebind.GenerateJNIWrapper;
+import me.judge.nativebind.GenerateNativeWrapper;
 import okhttp3.OkHttpClient;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class SMML {
      * Get the version of the SMML implementation.
      * @return the version of the SMML implementation
      */
+    @GenerateNativeWrapper(prefix = "smmml")
+    @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
     public static String getVersion() {
         return "1.0.0";
     }
@@ -25,6 +29,8 @@ public class SMML {
      * @param source the source to get the API version from
      * @return the API version of the given source
      */
+    @GenerateNativeWrapper(prefix = "smmml")
+    @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
     public static String getSourceApiVersion(Source source) {
         return source.getSourceInterface().apiVersion();
     }
@@ -35,6 +41,8 @@ public class SMML {
      * @param sources the sources to search in
      * @return a CompletableFuture that will complete with an array of ResourceResult objects
      */
+    @GenerateNativeWrapper(prefix = "smmml")
+    @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
     public static CompletableFuture<ResourceResult[]> search(SearchRequest request, Source... sources) {
         List<CompletableFuture<ResourceResult[]>> futures = new ArrayList<>();
         if (sources.length == 0) {
@@ -69,6 +77,8 @@ public class SMML {
      * @return a CompletableFuture that will complete with an array of ResourceVersion objects
      */
     // TODO: Add builder for this method to allow for filtering by game version, loader, etc.
+    @GenerateNativeWrapper(prefix = "smmml")
+    @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
     public static CompletableFuture<ResourceVersion[]> getProjectVersions(String projectId, Source source) {
         return source.getSourceInterface().getProjectVersions(projectId);
     }
