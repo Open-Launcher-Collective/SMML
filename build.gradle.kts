@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("java-library")
+    id("maven-publish")
 }
 
 group = "dev.cadindie"
@@ -22,4 +24,15 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = "dev.cadindie"
+            artifactId = "smml"
+            version = "0.1.0-alpha.1"
+        }
+    }
 }
