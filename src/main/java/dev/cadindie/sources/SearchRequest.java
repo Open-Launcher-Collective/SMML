@@ -32,55 +32,55 @@ public class SearchRequest {
         private SortMethod sortMethod = SortMethod.RELEVANCE;
         private SortOrder sortOrder = SortOrder.DESCENDING;
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilder")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public Builder(@NotNull String query) {
             this.query = query;
         }
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilderQuery")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public Builder query(String query) {
             this.query = query;
             return this;
         }
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilderGameVersion")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public Builder gameVersion(String ...versions) {
             this.gameVersions = versions;
             return this;
         }
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilderLoader")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public Builder loader(Loader loader) {
             this.loader = loader;
             return this;
         }
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilderLimit")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public Builder limit(int limit) {
             this.limit = limit;
             return this;
         }
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilderSortMethod")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public Builder sortMethod(SortMethod sortMethod) {
             this.sortMethod = sortMethod;
             return this;
         }
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilderSortOrder")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public Builder sortOrder(SortOrder sortOrder) {
             this.sortOrder = sortOrder;
             return this;
         }
 
-        @GenerateNativeWrapper(prefix = "smmml")
+        @GenerateNativeWrapper(prefix = "smmml", name = "searchRequestBuilderBuild")
         @GenerateJNIWrapper(jniClass = "dev.cadindie.SMMLJNIBridge")
         public SearchRequest build() {
             if (query == null) {
