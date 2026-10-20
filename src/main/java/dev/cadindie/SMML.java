@@ -2,8 +2,10 @@ package dev.cadindie;
 
 import dev.cadindie.sources.SearchRequest;
 import dev.cadindie.sources.Source;
+import dev.cadindie.utils.ModParser;
 import okhttp3.OkHttpClient;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,5 +73,14 @@ public class SMML {
     // TODO: Add builder for this method to allow for filtering by game version, loader, etc.
     public static CompletableFuture<ResourceVersion[]> getProjectVersions(String projectId, Source source) {
         return source.getSourceInterface().getProjectVersions(projectId);
+    }
+
+    /**
+     * Parse the mods folder of a given instance directory and return an array of Resource objects representing the mods found.
+     * @param modsFolder the path to the mods folder to parse
+     * @return an array of Resource objects representing the mods found in the given mods folder
+     */
+    public static Resource[] parseModsFolder(String modsFolder) {
+        return ModParser.parseFolder(modsFolder);
     }
 }

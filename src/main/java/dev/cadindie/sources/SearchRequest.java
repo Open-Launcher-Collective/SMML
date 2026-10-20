@@ -29,7 +29,6 @@ public class SearchRequest {
         private int limit = 10;
         private SortMethod sortMethod = SortMethod.RELEVANCE;
         private SortOrder sortOrder = SortOrder.DESCENDING;
-
         public Builder(@NotNull String query) {
             this.query = query;
         }
@@ -67,6 +66,10 @@ public class SearchRequest {
         public SearchRequest build() {
             if (query == null) {
                 throw new RuntimeException("Query cannot be null");
+            }
+
+            if (limit < 1) {
+                throw new RuntimeException("Limit must be greater than 0");
             }
 
             return new SearchRequest(this);

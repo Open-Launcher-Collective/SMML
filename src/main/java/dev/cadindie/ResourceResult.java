@@ -2,7 +2,7 @@ package dev.cadindie;
 
 import dev.cadindie.sources.Source;
 
-public interface ResourceResult {
+public interface ResourceResult extends Resource {
     String name();
     String id();
     String iconUrl();
