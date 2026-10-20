@@ -39,6 +39,7 @@ public class CurseForgeResourceVersion implements ResourceVersion {
         return "";
     }
 
+    // TODO: Separate loader/platform info and versions
     @Override
     public String[] mcVersions() {
         return gameVersions;

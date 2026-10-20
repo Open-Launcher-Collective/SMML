@@ -87,6 +87,10 @@ public class SearchRequest {
                 throw new RuntimeException("Query cannot be null");
             }
 
+            if (limit < 1) {
+                throw new RuntimeException("Limit must be greater than 0");
+            }
+
             return new SearchRequest(this);
         }
     }

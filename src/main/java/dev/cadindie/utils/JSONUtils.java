@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -17,15 +15,16 @@ public class JSONUtils {
         return GSON.fromJson(json, clazz);
     }
 
+    public static <T> T fromJson(InputStream inputStream, Class<T> clazz) {
+        try (Reader reader = new InputStreamReader(inputStream)) {
+            return GSON.fromJson(reader, clazz);
+        } catch (JsonSyntaxException | IOException e) {
+            throw new RuntimeException("Failed to parse JSON from InputStream", e);
+        }
+    }
+
     public static void fromObject(Object obj, Path outPath) throws IOException {
         Files.createDirectories(outPath.getParent());
         Files.write(outPath, GSON.toJson(obj).getBytes());
     }
-
-/*    public static <T> T fromFileJson(Path json, Class<T> clazz) throws IOException, JsonSyntaxException {
-        if(!Files.exists(json)) {
-            throw new IOException(json + " does not exist");
-        }
-        return GSON.fromJson(ConnectionUtil.readerToString(new BufferedReader(new FileReader(json.toFile()))), clazz);
-    }*/
 }
