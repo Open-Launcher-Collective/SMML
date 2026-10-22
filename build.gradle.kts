@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.squareup.okhttp3:okhttp:5.5.0")
+    implementation("com.squareup.okhttp3:okhttp:5.4.0")
     implementation("com.squareup.moshi:moshi:1.15.2")
     implementation("com.moandjiezana.toml:toml4j:0.7.2")
     compileOnly("org.graalvm.sdk:nativeimage:25.3.4.1")
