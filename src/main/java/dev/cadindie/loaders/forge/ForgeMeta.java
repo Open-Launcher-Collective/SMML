@@ -1,12 +1,11 @@
 package dev.cadindie.loaders.forge;
 
+import com.moandjiezana.toml.Toml;
 import dev.cadindie.Resource;
 import dev.cadindie.ResourceType;
-import org.tomlj.Toml;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -21,12 +20,14 @@ public class ForgeMeta implements Resource {
 
     public static Resource getResource(ZipFile zipFile, ZipEntry entry) {
         try (InputStream is = zipFile.getInputStream(entry)) {
-            String meta = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-            return Toml.parseAs(meta, ForgeMeta.class);
-        } catch (IOException e) {
+            Toml toml = new Toml().read(is);
+            Toml firstMod = toml.getTables("mods").getFirst();
+            return firstMod.to(ForgeMeta.class);
+        } catch (IOException | NullPointerException | IndexOutOfBoundsException e) {
             throw new RuntimeException("Failed to read META-INF/mods.toml from jar file", e);
         }
     }
+
 
     @Override
     public String name() {

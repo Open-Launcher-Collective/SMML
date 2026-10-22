@@ -17,15 +17,6 @@ public enum Source {
         this.name = name;
     }
 
-    public static Source fromString(String name) {
-        for (Source Source : Source.values()) {
-            if (Source.name.equalsIgnoreCase(name)) {
-                return Source;
-            }
-        }
-        return UNKNOWN;
-    }
-
     public String toString() {
         return this.name;
     }

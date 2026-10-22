@@ -39,8 +39,8 @@ public class ModParser {
             for (ZipEntry entry : java.util.Collections.list(zipFile.entries())) {
                 switch (entry.getName()) {
                     case "fabric.mod.json": return FabricMeta.getResource(zipFile, entry);
-                    case "META-INF/mods.toml": return ForgeMeta.getResource(zipFile, entry);
-                    default: // TODO: NeoForge, Quilt, Paper, etc
+                    case "META-INF/mods.toml", "META-INF/neoforge.mods.toml": return ForgeMeta.getResource(zipFile, entry);
+                    default: // TODO: Quilt, Paper, etc
                 }
             }
         } catch (IOException e) {
