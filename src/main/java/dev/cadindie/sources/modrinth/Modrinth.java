@@ -29,6 +29,7 @@ public class Modrinth implements SourceInterface {
                 .addQueryParameter("query", searchRequest.query)
                 //.addQueryParameter("facets", searchRequest.facets)
                 .addQueryParameter("index", searchRequest.sortMethod.modrinthName)
+                .addQueryParameter("offset", String.valueOf(((searchRequest.page - 1) * searchRequest.limit)))
                 .addQueryParameter("limit", String.valueOf(searchRequest.limit))
                 .build();
 

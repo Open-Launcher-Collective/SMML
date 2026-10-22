@@ -29,6 +29,7 @@ public class Hangar implements SourceInterface {
                 .addPathSegment("projects")
                 .addQueryParameter("query", searchRequest.query)
                 .addQueryParameter("sort", searchRequest.sortMethod.hangarName)
+                .addQueryParameter("offset", String.valueOf(((searchRequest.page - 1) * searchRequest.limit)))
                 .addQueryParameter("limit", String.valueOf(searchRequest.limit))
                 .build();
 

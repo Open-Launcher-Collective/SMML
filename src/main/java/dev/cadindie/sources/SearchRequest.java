@@ -9,6 +9,7 @@ public class SearchRequest {
     public final String query;
     public final String[] gameVersions;
     public final Loader loader;
+    public final int page;
     public final int limit;
     public final SortMethod sortMethod;
     public final SortOrder sortOrder;
@@ -17,6 +18,7 @@ public class SearchRequest {
         this.query = builder.query;
         this.gameVersions = builder.gameVersions;
         this.loader = builder.loader;
+        this.page = builder.page;
         this.limit = builder.limit;
         this.sortMethod = builder.sortMethod;
         this.sortOrder = builder.sortOrder;
@@ -26,6 +28,7 @@ public class SearchRequest {
         private String query;
         private String[] gameVersions;
         private Loader loader;
+        private int page = 1;
         private int limit = 10;
         private SortMethod sortMethod = SortMethod.RELEVANCE;
         private SortOrder sortOrder = SortOrder.DESCENDING;
@@ -53,6 +56,11 @@ public class SearchRequest {
             return this;
         }
 
+        public Builder page(int page) {
+            this.page = page;
+            return this;
+        }
+
         public Builder sortMethod(SortMethod sortMethod) {
             this.sortMethod = sortMethod;
             return this;
@@ -70,6 +78,10 @@ public class SearchRequest {
 
             if (limit < 1) {
                 throw new RuntimeException("Limit must be greater than 0");
+            }
+
+            if (page < 1) {
+                throw new RuntimeException("page must be greater than 0");
             }
 
             return new SearchRequest(this);

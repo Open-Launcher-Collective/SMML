@@ -30,6 +30,7 @@ public class Spiget implements SourceInterface {
                 .addPathSegment(searchRequest.query)
                 .addQueryParameter("sort", searchRequest.sortMethod.spigetName)
                 .addQueryParameter("size", String.valueOf(searchRequest.limit))
+                .addQueryParameter("page", String.valueOf(searchRequest.page))
                 .build();
 
         Request request = new Request.Builder().url(url).build();

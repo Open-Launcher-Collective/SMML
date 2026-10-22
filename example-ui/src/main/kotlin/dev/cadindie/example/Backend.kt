@@ -24,8 +24,10 @@ object Backend {
         sortMethod: SortMethod,
         sortOrder: SortOrder,
         limit: Int,
+        page: Int = 1,
     ): List<ResourceResult> = withContext(Dispatchers.IO) {
         val builder = SearchRequest.Builder(query)
+            .page(page)
             .sortMethod(sortMethod)
             .sortOrder(sortOrder)
             .limit(limit)

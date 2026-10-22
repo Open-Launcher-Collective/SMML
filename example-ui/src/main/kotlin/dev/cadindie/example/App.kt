@@ -79,13 +79,16 @@ private fun BrowseScreen(onInstalled: () -> Unit) {
     var error by remember { mutableStateOf<String?>(null) }
     var selected by remember { mutableStateOf<ResourceResult?>(null) }
 
-    fun search() {
+    var page by remember { mutableStateOf(1) }
+
+    fun search(newPage: Int = 1) {
         loading = true; error = null; selected = null
         scope.launch {
             try {
                 results = Backend.search(
-                    query, sources, gameVersion, loader, sortMethod, sortOrder, limit.toIntOrNull()?.coerceIn(1, 50) ?: 10,
+                    query, sources, gameVersion, loader, sortMethod, sortOrder, limit.toIntOrNull()?.coerceIn(1, 50) ?: 10, newPage,
                 )
+                page = newPage
             } catch (e: Exception) {
                 results = emptyList(); error = e.message ?: e.toString()
             }
@@ -97,7 +100,7 @@ private fun BrowseScreen(onInstalled: () -> Unit) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 OutlinedTextField(query, { query = it }, label = { Text("Search") }, singleLine = true, modifier = Modifier.weight(1f))
-                Button(::search, enabled = !loading && query.isNotBlank() && sources.isNotEmpty()) { Text("Search") }
+                Button({ search() }, enabled = !loading && query.isNotBlank() && sources.isNotEmpty()) { Text("Search") }
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(gameVersion, { gameVersion = it }, label = { Text("MC version") }, singleLine = true, modifier = Modifier.weight(1f))
@@ -116,6 +119,11 @@ private fun BrowseScreen(onInstalled: () -> Unit) {
             }
             if (loading) LinearProgressIndicator(Modifier.fillMaxWidth())
             error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                TextButton({ search(page - 1) }, enabled = !loading && page > 1) { Text("Previous") }
+                Text("Page $page")
+                TextButton({ search(page + 1) }, enabled = !loading && results.isNotEmpty()) { Text("Next") }
+            }
             LazyColumn(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 items(results) { r -> ResultCard(r, r === selected) { selected = r } }
             }

@@ -34,6 +34,7 @@ public class CurseForge implements SourceInterface {
                 .addQueryParameter("searchFilter", searchRequest.query)
                 .addQueryParameter("sortField", searchRequest.sortMethod.curseforgeName)
                 .addQueryParameter("pageSize", String.valueOf(searchRequest.limit))
+                .addQueryParameter("index", String.valueOf(((searchRequest.page - 1) * searchRequest.limit)))
                 .addQueryParameter("sortOrder", searchRequest.sortOrder.curseforgeName)
                 .build();
 
